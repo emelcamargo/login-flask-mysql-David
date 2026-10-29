@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 300px; }
+        h2 { text-align: center; margin-bottom: 20px; }
+        input { width: 100%; padding: 10px; margin: 8px 0; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        button { width: 100%; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+        button:hover { background-color: #218838; }
+        .alert.error { background-color: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 10px; border-radius: 4px; text-align: center; font-size: 14px; }
+        .link { text-align: center; margin-top: 15px; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Crear Cuenta</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert {{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form action="/registro" method="POST">
+            <input type="text" name="usuario" placeholder="Nombre de Usuario" required>
+            <input type="email" name="email" placeholder="Correo Electrónico" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <button type="submit">Registrarse</button>
+        </form>
+
+        <div class="link">
+            ¿Ya tienes cuenta? <a href="/login">Inicia sesión</a>
+        </div>
+    </div>
+</body>
+</html>
